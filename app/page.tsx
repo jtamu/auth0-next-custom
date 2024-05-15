@@ -12,6 +12,7 @@ export default async function Home() {
       {user && <a href="/api/auth/logout" className="inline-block bg-white hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 border border-gray-300 rounded shadow">ログアウト</a>}
       <ProfileClient />
       {user && <Link href="/user/profile" className="text-blue-500 hover:text-blue-700 hover:underline">プロフィール</Link>}
+      {user && <Link href="/microposts" className="text-blue-500 hover:text-blue-700 hover:underline">投稿</Link>}
       Hello World
     </main>
   );
