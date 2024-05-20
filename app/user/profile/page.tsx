@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 export default function Profile() {
   const router = useRouter();
 
-  const { user, error, isLoading } = useUser();
+  const { user, error, isLoading, checkSession } = useUser();
   const [name, setName] = useState('');
 
   useEffect(() => {
@@ -15,13 +15,13 @@ export default function Profile() {
   }, [user]);
 
   async function updateProfile() {
-    const result = window.confirm('ユーザ情報を更新するためにログアウトします。よろしいですか？');
-    if (!result) return;
     await fetch(`${window.location.origin}/api/users`, {
       method: 'PATCH',
       body: JSON.stringify({'name': name}),
     });
-    router.push('/api/auth/logout');
+    // sessionを更新する
+    checkSession();
+    router.push('/');
   }
 
   if (isLoading || !user) return <div>Loading...</div>
