@@ -9,15 +9,17 @@ export default function Profile() {
 
   const { user, error, isLoading, checkSession } = useUser();
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     setName(user?.name ?? '');
+    setEmail(user?.email ?? '');
   }, [user]);
 
   async function updateProfile() {
     await fetch(`${window.location.origin}/api/users`, {
       method: 'PATCH',
-      body: JSON.stringify({'name': name}),
+      body: JSON.stringify({'name': name, 'email': email}),
     });
     // sessionを更新する
     checkSession();
@@ -42,7 +44,7 @@ export default function Profile() {
           メールアドレス
         </label>
         <input id="email" type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value={user.email ?? ''} readOnly />
+          value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
       <div className="flex items-center justify-between">
         <button id="save-btn" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
