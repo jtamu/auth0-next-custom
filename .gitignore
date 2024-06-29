@@ -8,6 +8,7 @@
 
 # testing
 /coverage
+/pacts
 
 # next.js
 /.next/
