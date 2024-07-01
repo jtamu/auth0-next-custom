@@ -20,14 +20,14 @@ describe('GET /ping', () => {
             willRespondWith: {
                 status: 200,
                 headers: {'Content-Type': 'application/json'},
-                body: MatchersV3.equal('pong'),
+                body: MatchersV3.equal({message: 'pong'}),
             }
         });
 
         await provider.executeTest(async (mockserver) => {
             const service = MicropostService(mockserver.url);
             const response = await service.ping();
-            expect(response).toStrictEqual('pong');
+            expect(response.message).toStrictEqual('pong');
         })
     })
 });
