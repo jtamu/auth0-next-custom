@@ -1,0 +1,6 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - aws amplify start-job --app-id d2ii8dlssorfy8 --branch-name main --job-type RELEASE
