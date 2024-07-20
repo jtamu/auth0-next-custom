@@ -1,6 +1,12 @@
 version: 0.2
 
 phases:
+  install:
+    commands:
+      - npm ci
+  pre_build:
+    commands:
+      - npm run test
   build:
     commands:
       - aws amplify start-job --app-id d2ii8dlssorfy8 --branch-name main --job-type RELEASE
