@@ -9,7 +9,7 @@ phases:
     on-failure: ABORT
     commands:
       - npm run test
-      - npm run publish
+      - npm run test:publish
   build:
     on-failure: ABORT
     commands:

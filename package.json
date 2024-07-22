@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "publish": "docker run --rm -w ${PWD} -v ${PWD}:${PWD} pactfoundation/pact-cli:latest publish ${PWD}/pacts --consumer-app-version=$(git rev-parse HEAD) --branch=$(git branch --contains | cut -d ' ' -f 2) --broker-base-url=${PACT_BROKER_BASE_URL} --broker-username ${PACT_BROKER_USERNAME} --broker-password ${PACT_BROKER_PASSWORD}"
+    "test:publish": "./node_modules/.bin/pact-broker publish ./pacts --consumer-app-version=$(git rev-parse HEAD) --auto-detect-version-properties --broker-base-url=${PACT_BROKER_BASE_URL} --broker-username ${PACT_BROKER_USERNAME} --broker-password ${PACT_BROKER_PASSWORD}"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.5.0",
@@ -19,6 +19,7 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@pact-foundation/pact-cli": "^15.0.3",
     "@types/jest": "^28.1.8",
     "@types/node": "^20",
     "@types/react": "^18",
