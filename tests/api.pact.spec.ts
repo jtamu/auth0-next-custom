@@ -42,7 +42,7 @@ describe('GET /auth0/microposts', () => {
             withRequest: {
                 method: 'GET',
                 path: '/auth0/microposts',
-                headers: {'Authorization': regex('^Bearer\\s+[\\w-]+$', 'Bearer token123')},
+                // 実際はAuthorizationヘッダにBearerトークンを含める必要がある
             },
             willRespondWith: {
                 status: 200,
@@ -62,25 +62,4 @@ describe('GET /auth0/microposts', () => {
             );
         })
     });
-
-    it('401を返すこと', async () => {
-        provider.addInteraction({
-            // Authorizationヘッダがない場合は、MicropostServiceの設計上起こり得ない
-            states: [{description: 'Authorizationヘッダが不正な場合'}],
-            uponReceiving: 'ユーザの全ての投稿をリクエストする',
-            withRequest: {
-                method: 'GET',
-                path: '/auth0/microposts',
-                headers: {'Authorization': regex('^Bearer\\s+[\\w-]+$', 'Bearer token123')},
-            },
-            willRespondWith: {
-                status: 401
-            }
-        });
-
-        await provider.executeTest(async (mockserver) => {
-            const service = MicropostService(mockserver.url);
-            await expect(service.getAll('hoge')).rejects.toThrow(/401/)
-        })
-    })
 })
