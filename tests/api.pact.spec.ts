@@ -37,7 +37,7 @@ describe('GET /ping', () => {
 describe('GET /auth0/microposts', () => {
     it('micropostsを返すこと', async () => {
         provider.addInteraction({
-            states: [{description: 'Authorizationヘッダが正しく設定されている場合'}],
+            states: [{description: 'ユーザの投稿が存在する場合'}],
             uponReceiving: 'ユーザの全ての投稿をリクエストする',
             withRequest: {
                 method: 'GET',
