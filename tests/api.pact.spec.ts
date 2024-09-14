@@ -63,3 +63,30 @@ describe('GET /auth0/microposts', () => {
         })
     });
 })
+
+describe('POST /auth0/microposts', () => {
+    it('例外が発生しないこと', async () => {
+        provider.addInteraction({
+            states: [{description: 'リクエスト内容が正しい場合'}],
+            uponReceiving: 'ユーザの投稿を投げる',
+            withRequest: {
+                method: 'POST',
+                path: '/auth0/microposts',
+                body: {
+                    content: string('hello'),
+                }
+                // 実際はAuthorizationヘッダにBearerトークンを含める必要がある
+            },
+            willRespondWith: {
+                status: 201,
+                headers: {'Content-Type': 'application/json'},
+                body: null,
+            }
+        });
+
+        await provider.executeTest(async (mockserver) => {
+            const service = MicropostService(mockserver.url);
+            await expect(service.post('hoge', {content: 'world'})).resolves.not.toThrow();
+        })
+    });
+})
