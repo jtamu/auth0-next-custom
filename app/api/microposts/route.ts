@@ -23,6 +23,7 @@ export const POST = withApiAuthRequired(async (req: NextRequest) => {
     scopes: ['read:microposts']
   });
   const service = MicropostService("https://nfk13r40e6.execute-api.ap-northeast-1.amazonaws.com/api")
-  await service.post(accessToken, req)
+  const reqJson = await req.json()
+  await service.post(accessToken, reqJson)
   return NextResponse.json(null, res);
 });

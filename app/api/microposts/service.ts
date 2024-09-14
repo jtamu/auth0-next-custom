@@ -21,8 +21,7 @@ export default function MicropostService(baseUrl: string) {
         return response.data;
     }
 
-    const post = async (accessToken: string|undefined, req: NextRequest) => {
-        const reqJson = await req.json();
+    const post = async (accessToken: string|undefined, reqJson: any) => {
         await axios.post(`${baseUrl}/auth0/microposts`, reqJson, {
             headers: {
               "Authorization": `Bearer ${accessToken}`,
