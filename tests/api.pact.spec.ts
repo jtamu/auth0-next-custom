@@ -62,6 +62,29 @@ describe('GET /auth0/microposts', () => {
             );
         })
     });
+
+    it('空配列を返すこと', async () => {
+        provider.addInteraction({
+            states: [{description: 'ユーザの投稿が存在しない場合'}],
+            uponReceiving: 'ユーザの全ての投稿をリクエストする',
+            withRequest: {
+                method: 'GET',
+                path: '/auth0/microposts',
+                // 実際はAuthorizationヘッダにBearerトークンを含める必要がある
+            },
+            willRespondWith: {
+                status: 200,
+                headers: {'Content-Type': 'application/json'},
+                body: [],
+            }
+        });
+
+        await provider.executeTest(async (mockserver) => {
+            const service = MicropostService(mockserver.url);
+            const response = await service.getAll('hoge');
+            expect(response).toStrictEqual([]);
+        })
+    })
 })
 
 describe('POST /auth0/microposts', () => {
