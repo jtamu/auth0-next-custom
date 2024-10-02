@@ -1,5 +1,4 @@
 import axios from "axios";
-import { NextRequest } from "next/server";
 
 export default function MicropostService(baseUrl: string) {
     const ping = async (): Promise<{message: string}> => {
