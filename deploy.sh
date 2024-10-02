@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Amplifyアプリのパラメータを設定
 APP_ID="d2ii8dlssorfy8"
