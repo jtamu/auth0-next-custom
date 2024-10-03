@@ -10,7 +10,7 @@ export default function MicropostService(baseUrl: string) {
         return res.json();
     }
 
-    const getAll = async (accessToken: string|undefined): Promise<Array<{content: string, postedAt: string}>> => {
+    const getAll = async (accessToken: string|undefined): Promise<Array<{content: string, postedAt: string, like: number}>> => {
         const response = await axios.get(`${baseUrl}/auth0/microposts`, {
             headers: {
               "Authorization": `Bearer ${accessToken}`,

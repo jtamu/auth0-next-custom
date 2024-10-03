@@ -10,7 +10,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 export default withPageAuthRequired(() => {
   const router = useRouter();
   const { user, error, isLoading } = useUser();
-  const [microposts, setMicroposts] = useState(Array<{content: string, postedAt: string}>);
+  const [microposts, setMicroposts] = useState(Array<{content: string, postedAt: string, like: number}>);
   const [content, setContent] = useState("");
 
   useEffect(() => {
@@ -46,6 +46,7 @@ export default withPageAuthRequired(() => {
                 <Image className="w-12 h-12 rounded-full mr-2" src={user.picture ?? ''} alt="facePicture" width={600} height={600} />
                 <div className="flex-grow">
                     <h3 className="m-0 text-lg">{micropost.content}</h3>
+                    <p className="my-1 text-sm text-gray-700">{micropost.like} いいね</p>
                     <p className="my-1 text-sm text-gray-700">{user.name}</p>
                     <p className="my-1 text-sm text-gray-700">{dayjs(micropost.postedAt).format('YYYY-MM-DD HH:mm:ss')}</p>
                 </div>
