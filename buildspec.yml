@@ -8,6 +8,7 @@ phases:
   pre_build:
     on-failure: ABORT
     commands:
+      - echo $DOCKER_TOKEN | docker login -u $DOCKER_USER --password-stdin
       - npm run test
       - npm run pact:publish
       - ./trigger_pipelines.sh
