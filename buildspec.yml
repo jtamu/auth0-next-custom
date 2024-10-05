@@ -10,6 +10,7 @@ phases:
     commands:
       - npm run test
       - npm run pact:publish
+      - ./trigger_pipelines.sh
       - npm run pact:can-i-deploy
   build:
     on-failure: ABORT
