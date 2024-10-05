@@ -50,7 +50,8 @@ describe('GET /auth0/microposts', () => {
                 body: eachLike({
                     content: string('Hello, World.'),
                     postedAt: timestamp('YYYY-MM-DD HH:mm:ss', '2024-08-21 23:01:01'),
-                    like: integer(123)
+                    like: integer(123),
+                    favorite: integer(456),
                 })
             }
         });
@@ -58,8 +59,8 @@ describe('GET /auth0/microposts', () => {
         await provider.executeTest(async (mockserver) => {
             const service = MicropostService(mockserver.url);
             const response = await service.getAll('hoge');
-            const {content, postedAt, like} = response[0];
-            expect(content == 'Hello, World.' && postedAt == '2024-08-21 23:01:01' && like == 123);
+            const {content, postedAt, like, favorite} = response[0];
+            expect(content == 'Hello, World.' && postedAt == '2024-08-21 23:01:01' && like == 123 && favorite == 456);
         })
     });
 
