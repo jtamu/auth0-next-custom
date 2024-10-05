@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "jest",
     "pact:publish": "docker run --rm -w ${PWD} -v ${PWD}:${PWD} pactfoundation/pact-cli:latest publish ${PWD}/pacts --consumer-app-version=$(git rev-parse HEAD) --branch=$(git branch --contains | cut -d ' ' -f 2) --broker-base-url=${PACT_BROKER_BASE_URL} --broker-username ${PACT_BROKER_USERNAME} --broker-password ${PACT_BROKER_PASSWORD}",
-    "pact:can-i-deploy": "docker run --rm -w ${PWD} -v ${PWD}:${PWD} pactfoundation/pact-cli:latest pact-broker can-i-deploy --retry-while-unkown 60 --pacticipant auth0-next-custom --version $(git rev-parse HEAD) --to-environment ${ENV} --broker-base-url=${PACT_BROKER_BASE_URL} --broker-username ${PACT_BROKER_USERNAME} --broker-password ${PACT_BROKER_PASSWORD}",
+    "pact:can-i-deploy": "docker run --rm -w ${PWD} -v ${PWD}:${PWD} pactfoundation/pact-cli:latest pact-broker can-i-deploy --retry-while-unknown 60 --pacticipant auth0-next-custom --version $(git rev-parse HEAD) --to-environment ${ENV} --broker-base-url=${PACT_BROKER_BASE_URL} --broker-username ${PACT_BROKER_USERNAME} --broker-password ${PACT_BROKER_PASSWORD}",
     "pact:record-deployment": "docker run --rm -w ${PWD} -v ${PWD}:${PWD} pactfoundation/pact-cli:latest pact-broker record-deployment --pacticipant auth0-next-custom --version $(git rev-parse HEAD) --environment ${ENV} --broker-base-url=${PACT_BROKER_BASE_URL} --broker-username ${PACT_BROKER_USERNAME} --broker-password ${PACT_BROKER_PASSWORD}"
   },
   "dependencies": {
